@@ -1,1 +1,34 @@
+from collections import deque
 
+# Graph represented as an adjacency list
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+def bfs(start):
+    visited = []          # Step 1: Create an empty visited list
+    queue = deque()       # Step 2: Create an empty queue
+
+    queue.append(start)   # Step 3: Put the start node into the queue
+    visited.append(start) # Step 4: Mark the start node as visited
+
+    while queue:          # Step 4.1: While the queue is not empty
+        current = queue.popleft()   # Pop the front node
+        print(current, end=" ")     # Print the current node
+
+        # Visit all connected neighbours
+        for neighbour in graph[current]:
+            if neighbour not in visited:
+                visited.append(neighbour)  # Add neighbour to visited
+                queue.append(neighbour)    # Add neighbour to the back of the queue
+
+    # Step 5: Queue becomes empty
+    print("\nBFS Traversal Completed.")
+
+# Driver code
+bfs('B')
